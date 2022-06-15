@@ -1,18 +1,25 @@
 package chiefarug.mods.compost;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+
+import java.util.function.Supplier;
 
 import static chiefarug.mods.compost.Compost.C_TAB;
 import static chiefarug.mods.compost.Compost.MODID;
@@ -21,21 +28,55 @@ public class Registry {
 
 	private static final Logger LOGGER = LogUtils.getLogger();
 
+	private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_BREAK = registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_STEP = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_PLACE = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_HIT = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_FALL = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+
+
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-	public static final RegistryObject<Block> COMPOST_BLOCK = BLOCKS.register("compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRASS)));
+	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL)));
+	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(new ForgeSoundType(1, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL))));
 
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(C_TAB);
 
-	public static final RegistryObject<Item> COMPOST_BLOCK_ITEM = ITEMS.register("compost", () -> new BlockItem(COMPOST_BLOCK.get(), ITEM_PROPERTIES));
+	public static final RegistryObject<Item> COMPOST_BLOCK_ITEM = registerBlockItem("compost", COMPOST_BLOCK);
+	public static final RegistryObject<Item> MYSTICAL_COMPOST_BLOCK_ITEM =registerBlockItem("mystical_compost", MYSTICAL_COMPOST_BLOCK);
+
+
+	//Crop allowlist is for crops that do not extend CropBlock, but you still want to count as crops
+	//Crop denylist is for crops that do extend CropBlock but do now want to count as crops
+	//Mystical denylist is for blocks that you do not want to allow mystical compost to tick
+	//Farmland is for blocks that you want to allow the tick to pass through when going up.
+	public static final TagKey<Block> CROP_ALLOWLIST = BlockTags.create(new ResourceLocation(MODID, "crop_allowlist"));
+	public static final TagKey<Block> CROP_DENYLIST = BlockTags.create(new ResourceLocation(MODID, "crop_denylist"));
+	public static final TagKey<Block> MYSTICAL_DENYLIST = BlockTags.create(new ResourceLocation(MODID, "mystical_denylist"));
+	public static final TagKey<Block> FARMlAND = BlockTags.create(new ResourceLocation(MODID, "farmland"));
 
 
 	public static void init() {
 	 LOGGER.info("HELLO FROM REGISTRY INIT");
 
-	 //IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-	 ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-	 BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+	 IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+	 SOUNDS.register(bus);
+	 BLOCKS.register(bus);
+	 ITEMS.register(bus);
+	}
+
+	private static RegistryObject<Block> registerBlock(String id, Supplier<Block> s) {
+		return BLOCKS.register(id, s);
+	}
+	private static RegistryObject<Item> registerItem(String id) {
+		return ITEMS.register(id, () -> new Item(ITEM_PROPERTIES));
+	}
+	private static RegistryObject<Item> registerBlockItem(String id, RegistryObject<Block> block) {
+		return ITEMS.register(id, () -> new BlockItem(block.get(), ITEM_PROPERTIES));
+	}
+	private static RegistryObject<SoundEvent> registerSound(String id) {
+		return SOUNDS.register(id, () -> new SoundEvent(new ResourceLocation(MODID + ':' + id)));
 	}
 
 

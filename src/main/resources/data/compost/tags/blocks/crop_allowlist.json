@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sugar_cane",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:sweet_berry_bush",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus"
+  ]
+}

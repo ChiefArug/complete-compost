@@ -1,0 +1,10 @@
+{
+  "block.mystical_compost.place": {
+    "sounds": [
+      "compost:mystical_compost",
+      "compost:mystical_compos1t",
+      "compost:mystical_compost2"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  }
+}

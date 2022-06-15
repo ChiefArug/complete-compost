@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "compost:block/compost"
-    }
+    "": [
+      {
+        "model": "compost:block/compost"
+      },
+      {
+        "model": "compost:block/compost",
+        "y": 90
+      },
+      {
+        "model": "compost:block/compost",
+        "y": 180
+      },
+      {
+        "model": "compost:block/compost",
+        "y": 270
+      }
+    ]
   }
 }
