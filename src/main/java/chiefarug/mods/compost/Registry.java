@@ -54,7 +54,7 @@ public class Registry {
 
 
 	//Crop allowlist is for crops that do not extend CropBlock, but you still want to count as crops
-	//Crop denylist is for crops that do extend CropBlock but do now want to count as crops
+	//Crop denylist is for crops that do extend CropBlock but do now want to count as crops. It overrides the whitelist if a block is in both.
 	//Mystical denylist is for blocks that you do not want to allow mystical compost to tick
 	//Farmland is for blocks that you want to allow the tick to pass through when going up.
 	public static final TagKey<Block> CROP_ALLOWLIST = BlockTags.create(new ResourceLocation(MODID, "crop_allowlist"));
