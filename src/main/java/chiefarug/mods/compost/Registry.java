@@ -3,6 +3,7 @@ package chiefarug.mods.compost;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -30,15 +31,20 @@ public class Registry {
 
 	private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_BREAK = registerSound("block.mystical_compost.place");
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_STEP = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_STEP = registerSound("block.mystical_compost.step");
 	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_PLACE = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
 	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_HIT = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
 	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_FALL = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final RegistryObject<SoundEvent> WATERLOGGED_COMPOST_STEP = registerSound("block.compost.step_waterlogged");
 
+	public static final SoundType MYSTICAL_COMPOST_SOUND = new ForgeSoundType(0.8F, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL);
+
+	public static final SoundType WATERLOGGED_COMPOST = new ForgeSoundType(1, 1, ()->SoundEvents.GRAVEL_BREAK, WATERLOGGED_COMPOST_STEP, ()->SoundEvents.GRAVEL_PLACE, ()->SoundEvents.GRAVEL_HIT, ()->	SoundEvents.GRAVEL_FALL);
+	public static final SoundType DEFAULT_COMPOST = SoundType.GRAVEL;
 
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL)));
-	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(new ForgeSoundType(1, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL))));
+	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(MYSTICAL_COMPOST_SOUND)));
 
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(C_TAB);
