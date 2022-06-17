@@ -16,7 +16,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid="complete_ompost")
+import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
+
+@Mod.EventBusSubscriber(modid=MODID)
 public class CompostCreation {
 	@SubscribeEvent
 	static void listen(PlayerInteractEvent.RightClickBlock event) {
