@@ -1,6 +1,5 @@
 package chiefarug.mods.complete_compost;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +18,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 
@@ -27,8 +25,6 @@ import static chiefarug.mods.complete_compost.CompleteCompost.C_TAB;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
 
 public class Registry {
-
-	private static final Logger LOGGER = LogUtils.getLogger();
 
 	private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_BREAK = registerSound("block.mystical_compost.place");
@@ -67,8 +63,6 @@ public class Registry {
 
 
 	public static void init() {
-	 LOGGER.info("HELLO FROM REGISTRY INIT");
-
 	 IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 	 SOUNDS.register(bus);
 	 BLOCKS.register(bus);
