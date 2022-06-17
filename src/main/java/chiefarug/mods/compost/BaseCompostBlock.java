@@ -1,10 +1,12 @@
 package chiefarug.mods.compost;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -19,6 +21,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.util.Random;
 
@@ -26,6 +30,8 @@ import static chiefarug.mods.compost.Registry.FARMlAND;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 public abstract class BaseCompostBlock extends Block implements SimpleWaterloggedBlock {
+
+	private static final Logger LOGGER = LogUtils.getLogger();
 
 	public BaseCompostBlock(Properties p_49795_) {
 		super(p_49795_);
@@ -107,11 +113,13 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		return Registry.DEFAULT_COMPOST;
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public FluidState getFluidState(BlockState state) {
-		return isWaterlogged(state) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-	}
+	//This means that blocks like sugar cane treat it as a water source, but also means it leaves behind water when you break it.
+
+	//@SuppressWarnings("deprecation")
+	//@Override
+	//public FluidState getFluidState(BlockState state) {
+	//	return isWaterlogged(state) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+	//}
 
 	//TODO: try fix particles appearing wonky on two of the sides
 	@Override
@@ -129,6 +137,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 					x += random.nextDouble();
 					z += random.nextDouble();
 				} else if (direction == Direction.UP) {
+					if (random.nextDouble() > 0.9) return; //Show less particles on the top of the block
 					y += 1.05D;
 					x += random.nextDouble();
 					z += random.nextDouble();
@@ -154,4 +163,17 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 			}
 		}
 	}
+
+	@Nullable
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockPos pos = context.getClickedPos();
+		BlockState bState = context.getLevel().getBlockState(pos);
+		FluidState fState = bState.getFluidState();
+		if (fState.is(Fluids.WATER)) {
+			return defaultBlockState().setValue(WATERLOGGED, true);
+		}
+		return defaultBlockState();
+	}
+
 }

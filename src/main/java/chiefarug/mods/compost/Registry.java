@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -57,10 +58,12 @@ public class Registry {
 	//Crop denylist is for crops that do extend CropBlock but do now want to count as crops. It overrides the whitelist if a block is in both.
 	//Mystical denylist is for blocks that you do not want to allow mystical compost to tick
 	//Farmland is for blocks that you want to allow the tick to pass through when going up.
+	//Dirt denylist is for blocks that are tagged with the dirt tag that you do not want to be able to create compost, like moss. It is recommended any compostables be in this tag, otherwise issues happen.
 	public static final TagKey<Block> CROP_ALLOWLIST = BlockTags.create(new ResourceLocation(MODID, "crop_allowlist"));
 	public static final TagKey<Block> CROP_DENYLIST = BlockTags.create(new ResourceLocation(MODID, "crop_denylist"));
 	public static final TagKey<Block> MYSTICAL_DENYLIST = BlockTags.create(new ResourceLocation(MODID, "mystical_denylist"));
 	public static final TagKey<Block> FARMlAND = BlockTags.create(new ResourceLocation(MODID, "farmland"));
+	public static final TagKey<Item> DIRT_DENYLIST = ItemTags.create(new ResourceLocation(MODID, "dirt_denylist"));
 
 
 	public static void init() {

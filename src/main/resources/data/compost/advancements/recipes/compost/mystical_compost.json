@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "compost:mystical_compost"
+    ]
+  },
+  "criteria": {
+    "has_compost": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "compost:compost"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "compost:mystical_compost"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_compost",
+      "has_the_recipe"
+    ]
+  ]
+}
