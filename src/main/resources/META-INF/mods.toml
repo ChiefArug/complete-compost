@@ -4,7 +4,7 @@ license="MIT"
 issueTrackerURL="https://github.com/ChiefArug/complete-compost/issues"
 [[mods]] #mandator
 modId="complete_compost" #mandatory
-version="${file.jarVersion}" #mandatory
+version="1.0" #mandatory
 displayName="Complete Compost" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/complete-compost/" #optional
 logoFile="pack.png" # Named so it also shows up as the mods datapacks icon
