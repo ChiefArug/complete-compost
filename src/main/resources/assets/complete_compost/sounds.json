@@ -1,0 +1,37 @@
+{
+  "block.mystical_compost.place": {
+    "sounds": [
+      "complete_compost:mystical_compost",
+      "complete_compost:mystical_compost1",
+      "complete_compost:mystical_compost2"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.mystical_compost.step": {
+    "sounds": [
+      {"name": "step/gravel1", "volume":  0.95, "pitch":  1.5},
+      {"name": "step/gravel2", "volume":  0.95, "pitch":  1.5},
+      {"name": "step/gravel3", "volume":  0.95, "pitch":  1.5},
+      {"name": "step/gravel4", "volume":  0.95, "pitch":  1.5}
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.compost.step": {
+    "sounds": [
+      {"name": "step/gravel1", "pitch":  1.1},
+      {"name": "step/gravel2", "pitch":  1.1},
+      {"name": "step/gravel3", "pitch":  1.1},
+      {"name": "step/gravel4", "pitch":  1.1}
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.compost.step_waterlogged": {
+    "sounds": [
+      {"name": "step/gravel1", "pitch":  0.8},
+      {"name": "step/gravel2", "pitch":  0.8},
+      {"name": "step/gravel3", "pitch":  0.8},
+      {"name": "step/gravel4", "pitch":  0.8}
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}

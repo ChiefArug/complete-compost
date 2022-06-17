@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "waterlogged=false": [
+      {
+        "model": "complete_compost:block/compost"
+      },
+      {
+        "model": "complete_compost:block/compost",
+        "y": 90
+      },
+      {
+        "model": "complete_compost:block/compost",
+        "y": 180
+      },
+      {
+        "model": "complete_compost:block/compost",
+        "y": 270
+      }
+    ],
+    "waterlogged=true": [
+      {
+        "model": "complete_compost:block/waterlogged_compost"
+      },
+      {
+        "model": "complete_compost:block/waterlogged_compost",
+        "y": 90
+      },
+      {
+        "model": "complete_compost:block/waterlogged_compost",
+        "y": 180
+      },
+      {
+        "model": "complete_compost:block/waterlogged_compost",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#C#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:gems/amethyst"
+    },
+    "C": {
+      "item": "complete_compost:compost"
+    }
+  },
+  "result": {
+    "item": "complete_compost:mystical_compost",
+    "count": 2
+  }
+}

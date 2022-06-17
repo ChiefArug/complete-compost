@@ -1,6 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"compost:compost"
+		"#complete_compost:compost"
 	]
 }
