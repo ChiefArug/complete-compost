@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -19,10 +20,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 import static chiefarug.mods.complete_compost.Registry.FARMlAND;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
@@ -36,7 +33,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos pos, Random random) {
+	public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
 		BlockPos above = pos.above();
 		BlockState aboveState = serverLevel.getBlockState(above);
 
@@ -50,7 +47,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void tick(BlockState state, ServerLevel serverLevel, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
 		BlockPos abovePos = pos.above();
 		BlockState aboveState = serverLevel.getBlockState(abovePos);
 
@@ -65,7 +62,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		}
 	}
 
-	abstract void tryTick(BlockState aboveState, ServerLevel serverLevel, BlockPos abovePos, Random random);
+	abstract void tryTick(BlockState aboveState, ServerLevel serverLevel, BlockPos abovePos, RandomSource random);
 
 	@Override
 	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
@@ -96,7 +93,6 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		return isWaterlogged(state);
 	}
 
-	@NotNull
 	private Boolean isWaterlogged(BlockState state) {
 		return state.getValue(WATERLOGGED);
 	}
@@ -119,7 +115,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 
 	//TODO: try fix particles appearing wonky on two of the sides
 	@Override
-	public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		if (isWaterlogged(state)) {
 			Direction direction = Direction.getRandom(random);
 			BlockPos blockpos = pos.relative(direction);
@@ -160,7 +156,6 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		}
 	}
 
-	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();

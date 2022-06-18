@@ -2,6 +2,7 @@ package chiefarug.mods.complete_compost;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
@@ -15,7 +16,7 @@ public class MysticalCompostBlock extends BaseCompostBlock {
 	}
 
 	@Override
-	void tryTick(BlockState aboveState, ServerLevel serverLevel, BlockPos abovePos, Random random) {
+	void tryTick(BlockState aboveState, ServerLevel serverLevel, BlockPos abovePos, RandomSource random) {
 		if (aboveState.is(MYSTICAL_DENYLIST)) return;
 
 		aboveState.randomTick(serverLevel, abovePos, random);
