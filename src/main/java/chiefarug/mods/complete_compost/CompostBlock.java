@@ -6,8 +6,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Random;
-
 import static chiefarug.mods.complete_compost.Registry.CROP_ALLOWLIST;
 import static chiefarug.mods.complete_compost.Registry.CROP_DENYLIST;
 
