@@ -1,11 +1,14 @@
 {
   "replace": false,
   "values": [
+    "#minecraft:saplings",
     "minecraft:sugar_cane",
     "minecraft:brown_mushroom",
     "minecraft:red_mushroom",
     "minecraft:sweet_berry_bush",
     "minecraft:warped_fungus",
-    "minecraft:crimson_fungus"
+    "minecraft:crimson_fungus",
+    "minecraft:bamboo",
+    "minecraft:bamboo_sapling"
   ]
 }
