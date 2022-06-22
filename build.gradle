@@ -19,9 +19,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 
-version = '0.1'
+version = '1.0.1'
 group = 'chiefarug.mods.complete_compost' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'complete_compost'
+archivesBaseName = 'complete_compost_1.18.2'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
