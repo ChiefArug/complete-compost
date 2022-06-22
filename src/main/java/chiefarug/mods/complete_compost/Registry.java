@@ -60,6 +60,7 @@ public class Registry {
 	public static final TagKey<Block> MYSTICAL_DENYLIST = BlockTags.create(new ResourceLocation(MODID, "mystical_denylist"));
 	public static final TagKey<Block> FARMlAND = BlockTags.create(new ResourceLocation(MODID, "farmland"));
 	public static final TagKey<Item> DIRT_DENYLIST = ItemTags.create(new ResourceLocation(MODID, "dirt_denylist"));
+	public static final TagKey<Block> TALL_CROPS = BlockTags.create(new ResourceLocation(MODID, "tall_crops"));
 
 
 	public static void init() {
