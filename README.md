@@ -16,7 +16,7 @@ You can obtain compost by right-clicking any dirt block on a composter, it will 
 
 
 ### Tags:
-#####Complete Compost is very configurable with tags.
+##### Complete Compost is very configurable with tags.
 `#complete_compost:crop_allowlist` is a block tag for crops that do not extend work by default, but you still want to count as crops.\
 `#complete_compost:crop_denylist` is for crops that are considered crops by default, but do now want to count as crops. It overrides the whitelist if a block is in both.\
 `#complete_compost:mystical_denylist` is for blocks that you do not want to allow mystical compost to tick\
