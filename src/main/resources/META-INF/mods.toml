@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[41,)" #mandatory
+loaderVersion="[43,)" #mandatory
 license="MIT"
 issueTrackerURL="https://github.com/ChiefArug/complete-compost/issues"
 [[mods]] #mandator
@@ -16,16 +16,16 @@ That's it.
 Plants go brrrrr
 '''
 # Dependencies
-[[dependencies.compost]]
+[[dependencies.complete_compost]]
     modId="forge"
     mandatory=true
-    versionRange="[41,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 # Here's another dependency
-[[dependencies.compost]]
+[[dependencies.complete_compost]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,1.20)"
+    versionRange="[1.19.2,1.19.3)"
     ordering="NONE"
     side="BOTH"
