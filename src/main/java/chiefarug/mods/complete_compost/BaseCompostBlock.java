@@ -59,7 +59,6 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 
 		//We need to tick the top bamboo/sugarcane block, not the bottom one.
 		if (aboveState.is(Registry.TALL_CROPS)) {
-			CompleteCompost.LOGGER.debug("found tall crop");
 			while (aboveState.is(Registry.TALL_CROPS)) {
 				abovePos = abovePos.above();
 				aboveState = serverLevel.getBlockState(abovePos);
