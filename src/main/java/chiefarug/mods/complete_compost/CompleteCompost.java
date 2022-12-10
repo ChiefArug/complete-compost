@@ -15,7 +15,7 @@ public class CompleteCompost {
     public static final CreativeModeTab C_TAB = new CreativeModeTab("complete_compost") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Registry.COMPOST_BLOCK_ITEM.get());
+            return new ItemStack(Registry.MYSTICAL_COMPOST_BLOCK_ITEM.get());
         }
     };
 
