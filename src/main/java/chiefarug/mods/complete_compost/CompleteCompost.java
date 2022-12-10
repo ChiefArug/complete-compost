@@ -1,8 +1,8 @@
 package chiefarug.mods.complete_compost;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
 
@@ -12,12 +12,8 @@ public class CompleteCompost {
 
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "complete_compost";
-    public static final CreativeModeTab C_TAB = new CreativeModeTab("complete_compost") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(Registry.COMPOST_BLOCK_ITEM.get());
-        }
-    };
+    public static final ResourceLocation MODRL = new ResourceLocation(MODID, MODID);
+    public static CreativeModeTab C_TAB;
 
     public CompleteCompost()
     {
