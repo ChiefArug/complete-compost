@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "complete_compost:block/waterlogged_luminant_compost"
+  }
+}

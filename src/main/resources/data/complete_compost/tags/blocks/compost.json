@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "complete_compost:compost",
-    "complete_compost:mystical_compost"
+    "complete_compost:mystical_compost",
+    "complete_compost:luminant_compost"
   ]
 }

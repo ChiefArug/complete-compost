@@ -28,6 +28,7 @@ import static chiefarug.mods.complete_compost.CompleteCompost.C_TAB;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODRL;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MODID)
 public class Registry {
 
@@ -41,18 +42,20 @@ public class Registry {
 
 	public static final SoundType MYSTICAL_COMPOST_SOUND = new ForgeSoundType(0.8F, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL);
 
-	public static final SoundType WATERLOGGED_COMPOST = new ForgeSoundType(1, 1, ()->SoundEvents.GRAVEL_BREAK, WATERLOGGED_COMPOST_STEP, ()->SoundEvents.GRAVEL_PLACE, ()->SoundEvents.GRAVEL_HIT, ()->	SoundEvents.GRAVEL_FALL);
+	public static final SoundType WATERLOGGED_COMPOST = new ForgeSoundType(1, 1, () -> SoundEvents.GRAVEL_BREAK, WATERLOGGED_COMPOST_STEP, () -> SoundEvents.GRAVEL_PLACE, () -> SoundEvents.GRAVEL_HIT, () -> SoundEvents.GRAVEL_FALL);
 	public static final SoundType DEFAULT_COMPOST = SoundType.GRAVEL;
 
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL).strength(0.5f)));
 	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
+	public static final RegistryObject<Block> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
 
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties();//.tab(C_TAB);
 
 	public static final RegistryObject<Item> COMPOST_BLOCK_ITEM = registerBlockItem("compost", COMPOST_BLOCK);
-	public static final RegistryObject<Item> MYSTICAL_COMPOST_BLOCK_ITEM =registerBlockItem("mystical_compost", MYSTICAL_COMPOST_BLOCK);
+	public static final RegistryObject<Item> MYSTICAL_COMPOST_BLOCK_ITEM = registerBlockItem("mystical_compost", MYSTICAL_COMPOST_BLOCK);
+	public static final RegistryObject<Item> LUMINANT_COMPOST_BLOCK_ITEM = registerBlockItem("luminant_compost", LUMINANT_COMPOST_BLOCK);
 
 	@SubscribeEvent
 	void registerTab(CreativeModeTabEvent.Register event) {
@@ -61,6 +64,7 @@ public class Registry {
 				.displayItems((flags, output, isOp) -> {
 					output.accept(COMPOST_BLOCK_ITEM.get());
 					output.accept(MYSTICAL_COMPOST_BLOCK_ITEM.get());
+					output.accept(LUMINANT_COMPOST_BLOCK_ITEM.get());
 				})
 		);
 	}
@@ -87,9 +91,6 @@ public class Registry {
 
 	private static RegistryObject<Block> registerBlock(String id, Supplier<Block> s) {
 		return BLOCKS.register(id, s);
-	}
-	private static RegistryObject<Item> registerItem(String id) {
-		return ITEMS.register(id, () -> new Item(ITEM_PROPERTIES));
 	}
 	private static RegistryObject<Item> registerBlockItem(String id, RegistryObject<Block> block) {
 		return ITEMS.register(id, () -> new BlockItem(block.get(), ITEM_PROPERTIES));

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "complete_compost:mystical_compost",
+      "complete_compost:luminant_compost"
+    ]
+  },
+  "criteria": {
+    "has_compost": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "complete_compost:compost"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_compost"
+    ]
+  ]
+}
