@@ -1,6 +1,7 @@
 {
   "block.complete_compost.compost": "Compost",
   "block.complete_compost.mystical_compost": "Mystical Compost",
+  "block.complete_compost.luminant_compost": "Luminant Compost",
 
   "itemGroup.complete_compost": "Complete Compost"
 }
