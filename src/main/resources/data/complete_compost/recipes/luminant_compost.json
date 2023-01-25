@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#C#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "C": {
+      "item": "complete_compost:compost"
+    }
+  },
+  "result": {
+    "item": "complete_compost:luminant_compost",
+    "count": 1
+  }
+}
