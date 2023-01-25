@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
+import org.jetbrains.annotations.Nullable;
 
 import static chiefarug.mods.complete_compost.Registry.FARMlAND;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
@@ -108,7 +109,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 	}
 
 	@Override
-	public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
+	public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
 		if (isWaterlogged(state)) {
 			return Registry.WATERLOGGED_COMPOST;
 		}
@@ -166,6 +167,7 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		}
 	}
 
+	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
