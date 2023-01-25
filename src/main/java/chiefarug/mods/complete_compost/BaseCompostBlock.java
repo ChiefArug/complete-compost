@@ -19,7 +19,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -106,13 +105,12 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 		return isWaterlogged(state);
 	}
 
-	@NotNull
 	private Boolean isWaterlogged(BlockState state) {
 		return state.getValue(WATERLOGGED);
 	}
 
 	@Override
-	public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
+	public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
 		if (isWaterlogged(state)) {
 			return Registry.WATERLOGGED_COMPOST;
 		}
