@@ -2,34 +2,26 @@ package chiefarug.mods.complete_compost;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import org.jetbrains.annotations.Nullable;
 
 import static chiefarug.mods.complete_compost.Registry.FARMlAND;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-public abstract class BaseCompostBlock extends Block implements SimpleWaterloggedBlock {
+public abstract class BaseCompostBlock extends Block {
 
 	public BaseCompostBlock(Properties p_49795_) {
 		super(p_49795_);
-		registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -95,17 +87,12 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		pBuilder.add(WATERLOGGED);
-	}
-
-	@Override
 	public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
 		return isWaterlogged(state);
 	}
 
-	private Boolean isWaterlogged(BlockState state) {
-		return state.getValue(WATERLOGGED);
+	protected Boolean isWaterlogged(BlockState state) {
+		return false;
 	}
 
 	@Override
@@ -123,60 +110,4 @@ public abstract class BaseCompostBlock extends Block implements SimpleWaterlogge
 	//public FluidState getFluidState(BlockState state) {
 	//	return isWaterlogged(state) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	//}
-
-	//TODO: try fix particles appearing wonky on two of the sides
-	@Override
-	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-		if (isWaterlogged(state)) {
-			Direction direction = Direction.getRandom(random);
-			BlockPos blockpos = pos.relative(direction);
-			BlockState blockstate = level.getBlockState(blockpos);
-			if (!state.canOcclude() || !blockstate.isFaceSturdy(level, blockpos, direction.getOpposite())) {
-				double x = pos.getX();
-				double y = pos.getY();
-				double z = pos.getZ();
-				if (direction == Direction.DOWN) {
-					y -= 0.05D;
-					x += random.nextDouble();
-					z += random.nextDouble();
-				} else if (direction == Direction.UP) {
-					if (random.nextDouble() < 0.9) return; //Show less particles on the top of the block
-					y += 1.05D;
-					x += random.nextDouble();
-					z += random.nextDouble();
-				} else {
-					y += random.nextDouble() * 0.8D;
-					if (direction.getAxis() == Direction.Axis.X) {
-						z += random.nextDouble();
-						if (direction == Direction.EAST) {
-							++x;
-						} else {
-							x += 0.055D;
-						}
-					} else {
-						x += random.nextDouble();
-						if (direction == Direction.SOUTH) {
-							++z;
-						} else {
-							z += 0.055D;
-						}
-					}
-				}
-				level.addParticle(ParticleTypes.DRIPPING_WATER, x, y, z, 0.0D, 0.0D, 0.0D);
-			}
-		}
-	}
-
-	@Nullable
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockPos pos = context.getClickedPos();
-		BlockState bState = context.getLevel().getBlockState(pos);
-		FluidState fState = bState.getFluidState();
-		if (fState.is(Fluids.WATER)) {
-			return defaultBlockState().setValue(WATERLOGGED, true);
-		}
-		return defaultBlockState();
-	}
-
 }
