@@ -6,8 +6,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,7 +25,6 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-import static chiefarug.mods.complete_compost.CompleteCompost.C_TAB;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODRL;
 
@@ -58,15 +58,13 @@ public class Registry {
 	public static final RegistryObject<Item> LUMINANT_COMPOST_BLOCK_ITEM = registerBlockItem("luminant_compost", LUMINANT_COMPOST_BLOCK);
 
 	@SubscribeEvent
-	void registerTab(CreativeModeTabEvent.Register event) {
-		C_TAB = event.registerCreativeModeTab(MODRL, builder -> builder
-				.icon(() -> new ItemStack(MYSTICAL_COMPOST_BLOCK_ITEM.get()))
-				.displayItems((flags, output, isOp) -> {
-					output.accept(COMPOST_BLOCK_ITEM.get());
-					output.accept(MYSTICAL_COMPOST_BLOCK_ITEM.get());
-					output.accept(LUMINANT_COMPOST_BLOCK_ITEM.get());
-				})
-		);
+	static void registerTab(CreativeModeTabEvent.BuildContents event) {
+		CreativeModeTab tab = event.getTab();
+		if (tab == CreativeModeTabs.NATURAL_BLOCKS || tab == CreativeModeTabs.BUILDING_BLOCKS) {
+			event.accept(COMPOST_BLOCK_ITEM);
+			event.accept(MYSTICAL_COMPOST_BLOCK_ITEM);
+			event.accept(LUMINANT_COMPOST_BLOCK_ITEM);
+		}
 	}
 
 	//Crop allowlist is for crops that do not extend CropBlock, but you still want to count as crops

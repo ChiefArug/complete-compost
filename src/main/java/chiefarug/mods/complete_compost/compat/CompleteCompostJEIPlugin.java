@@ -10,9 +10,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.RegistryObject;
 
-
-import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
-import static chiefarug.mods.complete_compost.Registry.*;
+import static chiefarug.mods.complete_compost.CompleteCompost.MODRL;
+import static chiefarug.mods.complete_compost.Registry.COMPOST_BLOCK_ITEM;
+import static chiefarug.mods.complete_compost.Registry.LUMINANT_COMPOST_BLOCK_ITEM;
+import static chiefarug.mods.complete_compost.Registry.MYSTICAL_COMPOST_BLOCK_ITEM;
 
 @JeiPlugin
 public class CompleteCompostJEIPlugin implements IModPlugin {
@@ -21,7 +22,7 @@ public class CompleteCompostJEIPlugin implements IModPlugin {
 
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(MODID, MODID);
+		return MODRL;
 	}
 
 	@Override
