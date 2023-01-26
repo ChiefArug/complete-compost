@@ -2,10 +2,13 @@
 ###### A mod for Minecraft Forge about compost. That's it. Plants go brrrrr.
 
 ## What?
-Adds two blocks, compost and mystical compost.
+Adds three blocks that speed up plant growth.
 
  - ### Compost
   Speeds up the growth of crops above it by redirecting any random ticks it receives. It can stack infinitely as long as there is only compost or farmland between it and the crop. Can be waterlogged which improves growth rates (for plants that want water, like wheat) and allows sugar cane to be planted on it without a nearby water source.
+  
+ - ### Luminant Compost
+  Speeds up the growth of crops above it by redirecting any random ticks it receives. This variant also glows like glowstone! It can stack infinitely as long as there is only compost or farmland between it and the crop. Can be waterlogged which improves growth rates (for plants that want water, like wheat) and allows sugar cane to be planted on it without a nearby water source. 
 
  - ### Mystical Compost
   Speeds up the growth of any block above it by redirecting random ticks it receives. This means it can speed up blocks like budding amethyst. Just like regular Compost it can stack infinitely as long as there is only compost or farmland between it and the crop. Can be waterlogged which improves growth rates and allows sugar cane to be planted on it without a nearby water source.
