@@ -3,5 +3,11 @@
   "block.complete_compost.mystical_compost": "Mystical Compost",
   "block.complete_compost.luminant_compost": "Luminant Compost",
 
-  "itemGroup.complete_compost": "Complete Compost"
+  "itemGroup.complete_compost": "Complete Compost",
+  "description.complete_compost.generic_compost": "Makes the block above it grow faster. Can be stacked to world height limit for increased effect.",
+  "description.complete_compost.waterloggable_compost": "Is able to be waterlogged, which will significantly improve growth for things that require water such as crops. Waterlogging only needs to happen to the block directly below the crop",
+  "description.complete_compost.compost.limitations": "Only speeds up crop and plant growth.",
+  "description.complete_compost.compost.crafting": "Created by clicking a dirt-like block on a composter with at least one level of compost, which will be consumed",
+  "description.complete_compost.mystical_compost.limitations": "Speeds up growth of all growing blocks, including things such as amethyst budding blocks.",
+  "description.complete_compost.luminant_compost.it_glows": "Glows!"
 }
