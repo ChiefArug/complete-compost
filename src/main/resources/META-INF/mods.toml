@@ -4,7 +4,7 @@ license="MIT"
 issueTrackerURL="https://github.com/ChiefArug/complete-compost/issues"
 [[mods]] #mandator
 modId="complete_compost" #mandatory
-version="1.0.4" #mandatory
+version="${mod_version}" #mandatory
 displayName="Complete Compost" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/complete-compost/" #optional
 logoFile="pack.png" # Named so it also shows up as the mods datapacks icon
@@ -19,13 +19,13 @@ Plants go brrrrr
 [[dependencies.complete_compost]]
     modId="forge"
     mandatory=true
-    versionRange="[44,)"
+    versionRange="${forge_range}"
     ordering="NONE"
     side="BOTH"
 # Here's another dependency
 [[dependencies.complete_compost]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.3,1.20)"
+    versionRange="${minecraft_range}"
     ordering="NONE"
     side="BOTH"
