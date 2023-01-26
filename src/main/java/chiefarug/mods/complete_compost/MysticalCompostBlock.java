@@ -5,11 +5,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Random;
-
 import static chiefarug.mods.complete_compost.Registry.MYSTICAL_DENYLIST;
 
-public class MysticalCompostBlock extends BaseCompostBlock {
+public class MysticalCompostBlock extends CompostBlock {
 
 	public MysticalCompostBlock(Properties p_49795_) {
 		super(p_49795_);
@@ -21,6 +19,4 @@ public class MysticalCompostBlock extends BaseCompostBlock {
 
 		aboveState.randomTick(serverLevel, abovePos, random);
 	}
-
-
 }
