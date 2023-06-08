@@ -1,5 +1,6 @@
 package chiefarug.mods.complete_compost;
 
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -12,9 +13,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,20 +46,21 @@ public class Registry {
 	public static final SoundType DEFAULT_COMPOST = SoundType.GRAVEL;
 
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL).strength(0.5f)));
-	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
-	public static final RegistryObject<Block> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of(Material.DIRT).sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
+	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(0.5f)));
+	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of().sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
+	public static final RegistryObject<Block> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
 
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties();//.tab(C_TAB);
+	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties();
 
 	public static final RegistryObject<Item> COMPOST_BLOCK_ITEM = registerBlockItem("compost", COMPOST_BLOCK);
 	public static final RegistryObject<Item> MYSTICAL_COMPOST_BLOCK_ITEM = registerBlockItem("mystical_compost", MYSTICAL_COMPOST_BLOCK);
 	public static final RegistryObject<Item> LUMINANT_COMPOST_BLOCK_ITEM = registerBlockItem("luminant_compost", LUMINANT_COMPOST_BLOCK);
 
+
 	@SubscribeEvent
-	static void registerTab(CreativeModeTabEvent.BuildContents event) {
-		CreativeModeTab tab = event.getTab();
+	static void registerTab(BuildCreativeModeTabContentsEvent event) {
+		ResourceKey<CreativeModeTab> tab = event.getTabKey();
 		if (tab == CreativeModeTabs.NATURAL_BLOCKS || tab == CreativeModeTabs.BUILDING_BLOCKS) {
 			event.accept(COMPOST_BLOCK_ITEM);
 			event.accept(MYSTICAL_COMPOST_BLOCK_ITEM);

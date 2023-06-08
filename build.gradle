@@ -16,7 +16,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
 
     //mappings channel: 'parchment', version: '1.19.2-2022.11.27-1.19.3'
-    mappings channel: 'official', version: '1.19.3'
+    mappings channel: 'official', version: '1.20'
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -95,14 +95,14 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // use 1.19.3 version of jei
-    minecraft_version='1.19.3'
-    // compile against the JEI API but do not include it at runtime
+    String oldMC = minecraft_version
+    minecraft_version='1.19.3' // use the 1.19.3 version. this should mean that i dont have to remove my jei code to allow it to compile
+//    // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar for Forge
-//    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-    minecraft_version='1.19.4'
+//    // at runtime, use the full JEI jar for Forge
+////    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+    minecraft_version=oldMC
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
