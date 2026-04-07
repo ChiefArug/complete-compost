@@ -1,7 +1,7 @@
 package chiefarug.mods.complete_compost;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import org.slf4j.Logger;
 
@@ -12,7 +12,7 @@ public class CompleteCompost {
     @SuppressWarnings("unused")
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "complete_compost";
-    public static final ResourceLocation MODRL = ResourceLocation.fromNamespaceAndPath(MODID, MODID);
+    public static final Identifier MODRL = Identifier.fromNamespaceAndPath(MODID, MODID);
 
     public CompleteCompost(IEventBus modBus) {
         // Register all the stuff!

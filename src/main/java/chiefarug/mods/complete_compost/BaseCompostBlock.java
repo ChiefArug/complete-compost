@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TriState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.neoforged.neoforge.common.util.TriState;
 import org.jetbrains.annotations.Nullable;
 
 import static chiefarug.mods.complete_compost.Registry.FARMlAND;
@@ -23,7 +23,6 @@ public abstract class BaseCompostBlock extends Block {
 		super(p_49795_);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
 		BlockPos above = pos.above();
@@ -37,7 +36,6 @@ public abstract class BaseCompostBlock extends Block {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void tick(BlockState state, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
 		BlockPos abovePos = pos.above();

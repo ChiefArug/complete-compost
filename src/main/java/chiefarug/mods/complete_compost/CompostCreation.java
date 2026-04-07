@@ -43,7 +43,7 @@ public class CompostCreation {
 				Block.popResource(level, pos, new ItemStack(Registry.COMPOST_BLOCK_ITEM.get()));
 //				player.swing(event.getHand());
 				level.playSound(null, pos, SoundEvents.COMPOSTER_EMPTY, SoundSource.BLOCKS, 0.8F, 0.9F);
-				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
 		}

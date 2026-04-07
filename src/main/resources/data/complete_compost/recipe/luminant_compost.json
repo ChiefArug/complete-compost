@@ -6,12 +6,8 @@
     " # "
   ],
   "key": {
-    "#": {
-      "tag": "c:dusts/glowstone"
-    },
-    "C": {
-      "item": "complete_compost:compost"
-    }
+    "#": "#c:dusts/glowstone",
+    "C": "complete_compost:compost"
   },
   "result": {
     "id": "complete_compost:luminant_compost",

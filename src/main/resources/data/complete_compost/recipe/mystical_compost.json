@@ -6,12 +6,8 @@
     " # "
   ],
   "key": {
-    "#": {
-      "tag": "c:gems/amethyst"
-    },
-    "C": {
-      "item": "complete_compost:compost"
-    }
+    "#": "#c:gems/amethyst",
+    "C": "complete_compost:compost"
   },
   "result": {
     "id": "complete_compost:mystical_compost",

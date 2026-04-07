@@ -22,6 +22,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
@@ -43,9 +44,18 @@ public class Registry {
 	public static final SoundType DEFAULT_COMPOST = SoundType.GRAVEL;
 
 	private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-	public static final DeferredBlock<CompostBlock> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(0.5f)));
-	public static final DeferredBlock<MysticalCompostBlock> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of().sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
-	public static final DeferredBlock<CompostBlock> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
+	public static final DeferredBlock<CompostBlock> COMPOST_BLOCK = registerBlock("compost", CompostBlock::new, () ->
+			BlockBehaviour.Properties.of()
+					.sound(SoundType.GRAVEL)
+					.strength(0.5f));
+	public static final DeferredBlock<MysticalCompostBlock> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", MysticalCompostBlock::new, () ->
+			BlockBehaviour.Properties.of()
+					.sound(MYSTICAL_COMPOST_SOUND)
+					.strength(1f));
+	public static final DeferredBlock<CompostBlock> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", CompostBlock::new, () -> BlockBehaviour.Properties.of()
+			.sound(SoundType.GRAVEL)
+			.strength(1.0F)
+			.lightLevel(_s -> 15));
 
 	private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties();
@@ -87,8 +97,8 @@ public class Registry {
 	 modBus.addListener(Registry::registerTab);
 	}
 
-	private static <T extends Block> DeferredBlock<T> registerBlock(String id, Supplier<T> s) {
-		return BLOCKS.registerBlock(id, p -> s.get());
+	private static <T extends Block> DeferredBlock<T> registerBlock(String id, Function<BlockBehaviour.Properties, T> c, Supplier<BlockBehaviour.Properties> p) {
+		return BLOCKS.registerBlock(id, c, p);
 	}
 	private static DeferredItem<BlockItem> registerBlockItem(DeferredHolder<Block, ? extends Block> block) {
 		return ITEMS.registerSimpleBlockItem(block);
