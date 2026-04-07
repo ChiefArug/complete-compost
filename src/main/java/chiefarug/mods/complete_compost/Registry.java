@@ -1,5 +1,6 @@
 package chiefarug.mods.complete_compost;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -13,15 +14,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
@@ -29,36 +28,33 @@ import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
 import static chiefarug.mods.complete_compost.CompleteCompost.MODRL;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MODID)
 public class Registry {
 
-	private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_BREAK = registerSound("block.mystical_compost.place");
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_STEP = registerSound("block.mystical_compost.step");
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_PLACE = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_HIT = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
-	public static final RegistryObject<SoundEvent> MYSTICAL_COMPOST_FALL = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
-	public static final RegistryObject<SoundEvent> WATERLOGGED_COMPOST_STEP = registerSound("block.compost.step_waterlogged");
+	private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, MODID);
+	public static final DeferredHolder<SoundEvent, SoundEvent> MYSTICAL_COMPOST_BREAK = registerSound("block.mystical_compost.place");
+	public static final DeferredHolder<SoundEvent, SoundEvent> MYSTICAL_COMPOST_STEP = registerSound("block.mystical_compost.step");
+	public static final DeferredHolder<SoundEvent, SoundEvent> MYSTICAL_COMPOST_PLACE = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final DeferredHolder<SoundEvent, SoundEvent> MYSTICAL_COMPOST_HIT = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final DeferredHolder<SoundEvent, SoundEvent> MYSTICAL_COMPOST_FALL = MYSTICAL_COMPOST_BREAK;//registerSound("block.mystical_compost.place");
+	public static final DeferredHolder<SoundEvent, SoundEvent> WATERLOGGED_COMPOST_STEP = registerSound("block.compost.step_waterlogged");
 
-	public static final SoundType MYSTICAL_COMPOST_SOUND = new ForgeSoundType(0.8F, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL);
-
-	public static final SoundType WATERLOGGED_COMPOST = new ForgeSoundType(1, 1, () -> SoundEvents.GRAVEL_BREAK, WATERLOGGED_COMPOST_STEP, () -> SoundEvents.GRAVEL_PLACE, () -> SoundEvents.GRAVEL_HIT, () -> SoundEvents.GRAVEL_FALL);
+	public static final SoundType MYSTICAL_COMPOST_SOUND = new DeferredSoundType(0.8F, 1, MYSTICAL_COMPOST_BREAK, MYSTICAL_COMPOST_STEP, MYSTICAL_COMPOST_PLACE, MYSTICAL_COMPOST_HIT, MYSTICAL_COMPOST_FALL);
+	public static final SoundType WATERLOGGED_COMPOST = new DeferredSoundType(1, 1, () -> SoundEvents.GRAVEL_BREAK, WATERLOGGED_COMPOST_STEP, () -> SoundEvents.GRAVEL_PLACE, () -> SoundEvents.GRAVEL_HIT, () -> SoundEvents.GRAVEL_FALL);
 	public static final SoundType DEFAULT_COMPOST = SoundType.GRAVEL;
 
-	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-	public static final RegistryObject<Block> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(0.5f)));
-	public static final RegistryObject<Block> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of().sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
-	public static final RegistryObject<Block> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
+	private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+	public static final DeferredBlock<CompostBlock> COMPOST_BLOCK = registerBlock("compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(0.5f)));
+	public static final DeferredBlock<MysticalCompostBlock> MYSTICAL_COMPOST_BLOCK = registerBlock("mystical_compost", () -> new MysticalCompostBlock(BlockBehaviour.Properties.of().sound(MYSTICAL_COMPOST_SOUND).strength(1f)));
+	public static final DeferredBlock<CompostBlock> LUMINANT_COMPOST_BLOCK = registerBlock("luminant_compost", () -> new CompostBlock(BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(1.0F).lightLevel(_s -> 15)));
 
-	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+	private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 	private static final Item.Properties ITEM_PROPERTIES = new Item.Properties();
 
-	public static final RegistryObject<Item> COMPOST_BLOCK_ITEM = registerBlockItem("compost", COMPOST_BLOCK);
-	public static final RegistryObject<Item> MYSTICAL_COMPOST_BLOCK_ITEM = registerBlockItem("mystical_compost", MYSTICAL_COMPOST_BLOCK);
-	public static final RegistryObject<Item> LUMINANT_COMPOST_BLOCK_ITEM = registerBlockItem("luminant_compost", LUMINANT_COMPOST_BLOCK);
+	public static final DeferredItem<BlockItem> COMPOST_BLOCK_ITEM = registerBlockItem(COMPOST_BLOCK);
+	public static final DeferredItem<BlockItem> MYSTICAL_COMPOST_BLOCK_ITEM = registerBlockItem(MYSTICAL_COMPOST_BLOCK);
+	public static final DeferredItem<BlockItem> LUMINANT_COMPOST_BLOCK_ITEM = registerBlockItem(LUMINANT_COMPOST_BLOCK);
 
 
-	@SubscribeEvent
 	static void registerTab(BuildCreativeModeTabContentsEvent event) {
 		ResourceKey<CreativeModeTab> tab = event.getTabKey();
 		if (tab == CreativeModeTabs.NATURAL_BLOCKS || tab == CreativeModeTabs.BUILDING_BLOCKS) {
@@ -73,28 +69,31 @@ public class Registry {
 	//Mystical denylist is for blocks that you do not want to allow mystical compost to tick
 	//Farmland is for blocks that you want to allow the tick to pass through when going up.
 	//Dirt denylist is for blocks that are tagged with the dirt tag that you do not want to be able to create compost, like moss. It is recommended any compostables be in this tag, otherwise issues happen.
+	//Tall crops is for blocks that should have the topmost block in the stack be ticked rather than the bottom one (ie bamboo)
+	//
 	public static final TagKey<Block> CROP_ALLOWLIST = BlockTags.create(MODRL.withPath("crop_allowlist"));
 	public static final TagKey<Block> CROP_DENYLIST = BlockTags.create(MODRL.withPath("crop_denylist"));
 	public static final TagKey<Block> MYSTICAL_DENYLIST = BlockTags.create(MODRL.withPath("mystical_denylist"));
 	public static final TagKey<Block> FARMlAND = BlockTags.create(MODRL.withPath("farmland"));
 	public static final TagKey<Item> DIRT_DENYLIST = ItemTags.create(MODRL.withPath("dirt_denylist"));
 	public static final TagKey<Block> TALL_CROPS = BlockTags.create(MODRL.withPath("tall_crops"));
+	public static final TagKey<Block> PLANT_NEEDS_WATER = BlockTags.create(MODRL.withPath("plant_needs_water"));
 
 
-	public static void init() {
-	 IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-	 SOUNDS.register(bus);
-	 BLOCKS.register(bus);
-	 ITEMS.register(bus);
+	public static void init(IEventBus modBus) {
+	 SOUNDS.register(modBus);
+	 BLOCKS.register(modBus);
+	 ITEMS.register(modBus);
+	 modBus.addListener(Registry::registerTab);
 	}
 
-	private static RegistryObject<Block> registerBlock(String id, Supplier<Block> s) {
-		return BLOCKS.register(id, s);
+	private static <T extends Block> DeferredBlock<T> registerBlock(String id, Supplier<T> s) {
+		return BLOCKS.registerBlock(id, p -> s.get());
 	}
-	private static RegistryObject<Item> registerBlockItem(String id, RegistryObject<Block> block) {
-		return ITEMS.register(id, () -> new BlockItem(block.get(), ITEM_PROPERTIES));
+	private static DeferredItem<BlockItem> registerBlockItem(DeferredHolder<Block, ? extends Block> block) {
+		return ITEMS.registerSimpleBlockItem(block);
 	}
-	private static RegistryObject<SoundEvent> registerSound(String id) {
+	private static DeferredHolder<SoundEvent, SoundEvent> registerSound(String id) {
 		return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(MODRL.withPath(id)));
 	}
 

@@ -12,13 +12,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import static chiefarug.mods.complete_compost.CompleteCompost.MODID;
 
-@Mod.EventBusSubscriber(modid=MODID)
+@EventBusSubscriber(modid=MODID)
 public class CompostCreation {
 	@SubscribeEvent
 	static void listen(PlayerInteractEvent.RightClickBlock event) {

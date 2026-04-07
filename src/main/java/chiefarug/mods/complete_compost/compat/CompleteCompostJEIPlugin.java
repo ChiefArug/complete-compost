@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import static chiefarug.mods.complete_compost.CompleteCompost.MODRL;
 import static chiefarug.mods.complete_compost.Registry.COMPOST_BLOCK_ITEM;
@@ -54,9 +54,7 @@ public class CompleteCompostJEIPlugin implements IModPlugin {
 		);
 	}
 
-	private void addIngredientInfo(IRecipeRegistration reg, RegistryObject<Item> item, Component... text) {
-		reg.addIngredientInfo(new ItemStack(item.get()), VanillaTypes.ITEM_STACK,
-				text
-		);
+	private void addIngredientInfo(IRecipeRegistration reg, DeferredItem<? extends Item> item, Component... text) {
+		reg.addIngredientInfo(new ItemStack(item.get()), VanillaTypes.ITEM_STACK, text);
 	}
 }

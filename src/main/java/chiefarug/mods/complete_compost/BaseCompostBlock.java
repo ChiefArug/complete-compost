@@ -12,8 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
+import net.neoforged.neoforge.common.util.TriState;
 import org.jetbrains.annotations.Nullable;
 
 import static chiefarug.mods.complete_compost.Registry.FARMlAND;
@@ -67,23 +66,22 @@ public abstract class BaseCompostBlock extends Block {
 
 	abstract void tryTick(BlockState aboveState, ServerLevel serverLevel, BlockPos abovePos, RandomSource random);
 
-	@Override
-	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-		PlantType type = plantable.getPlantType(world, pos.relative(facing));
 
-		//PlantTypes suck. Thank you, have a nice day.
-		if (PlantType.BEACH.equals(type)) {
-			if(isWaterlogged(state)) return true;
+	@Override
+	public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPos, Direction facing, BlockState plant)  {
+
+		if (plant.is(Registry.PLANT_NEEDS_WATER)) {
+			if(isWaterlogged(state)) return TriState.TRUE;
 			for (Direction face : Direction.Plane.HORIZONTAL) {
-				BlockState blockState = world.getBlockState(pos.relative(face));
-				FluidState fluidState = world.getFluidState(pos.relative(face));
+				BlockState blockState = level.getBlockState(soilPos.relative(face));
+				FluidState fluidState = level.getFluidState(soilPos.relative(face));
 				if (fluidState.is(net.minecraft.tags.FluidTags.WATER) || blockState.is(Blocks.FROSTED_ICE)) {
-					return  true;
+					return TriState.TRUE;
 				}
 			}
-			return false;
+			return TriState.FALSE;
 		}
-		return true;
+		return TriState.TRUE;
 	}
 
 	@Override

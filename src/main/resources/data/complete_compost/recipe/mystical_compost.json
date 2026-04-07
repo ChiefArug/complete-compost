@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:gems/amethyst"
+      "tag": "c:gems/amethyst"
     },
     "C": {
       "item": "complete_compost:compost"
     }
   },
   "result": {
-    "item": "complete_compost:mystical_compost",
+    "id": "complete_compost:mystical_compost",
     "count": 2
   }
 }
